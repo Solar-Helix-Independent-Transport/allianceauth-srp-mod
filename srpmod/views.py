@@ -66,14 +66,14 @@ def srp_open_info(request, id=None):
         if id:
             linked = request.user.srp_character
             if linked:
-                logger.info("SRPMOD: {id} - checking {linked} online")
+                logger.info(f"SRPMOD: {id} - checking {linked} online")
                 online = providers.provider.client.Location.get_characters_character_id_online(character_id=linked.token.character_id, _request_options=providers.get_operation_auth_headers(linked.token)).result()
                 if online.get('online', False):
-                    logger.info("SRPMOD: {id} - {linked} is online")
+                    logger.info(f"SRPMOD: {id} - {linked} is online")
                     resp = providers.provider.client.User_Interface.post_ui_openwindow_information(target_id=id, _request_options=providers.get_operation_auth_headers(linked.token)).result()
-                    logger.info("SRPMOD: {id} - {linked} open window response {resp}")
+                    logger.info(f"SRPMOD: {id} - {linked} open window response {resp}")
                 else:
-                    logger.info("SRPMOD:{id} - {linked} is offline")
+                    logger.info(f"SRPMOD:{id} - {linked} is offline")
                     return HttpResponse("Failed! Character Offline!")
             else:
                 return HttpResponse("Failed! No Linked Cahracter!")
