@@ -71,7 +71,7 @@ def srp_open_info(request, id=None):
                 if online.get('online', False):
                     logger.info(f"SRPMOD: {id} - {linked.token.character_name} is online")
                     resp = providers.provider.client.User_Interface.post_ui_openwindow_information(target_id=id, token=linked.token.valid_access_token()).result()
-                    logger.info(f"SRPMOD: {id} - {linked.token.character_name} open window response {resp}")
+                    logger.info(f"SRPMOD: {id} - {linked.token.character_name} open window success")
                 else:
                     logger.info(f"SRPMOD: {id} - {linked.token.character_name} is offline")
                     return HttpResponse("Failed! Character Offline!")
