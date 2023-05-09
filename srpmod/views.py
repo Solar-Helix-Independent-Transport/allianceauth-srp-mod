@@ -73,7 +73,7 @@ def srp_open_info(request, id=None):
                     resp = providers.provider.client.User_Interface.post_ui_openwindow_information(target_id=id, token=linked.token.valid_access_token()).result()
                     logger.info(f"SRPMOD: {id} - {linked.token.character_name} open window response {resp}")
                 else:
-                    logger.info(f"SRPMOD:{id} - {linked.token.character_name} is offline")
+                    logger.info(f"SRPMOD: {id} - {linked.token.character_name} is offline")
                     return HttpResponse("Failed! Character Offline!")
             else:
                 return HttpResponse("Failed! No Linked Cahracter!")
