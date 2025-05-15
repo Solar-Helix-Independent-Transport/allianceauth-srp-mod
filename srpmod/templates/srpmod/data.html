@@ -323,9 +323,9 @@ ESC to cancel{% endblocktranslate %}" id="blah"></i></th>
                 success: function(response, newValue) {
                     newValue = parseInt(newValue);
                     const newValueOutput = `${newValue.toLocaleString()} ISK`;
-                    const next_copy_element = $(this)?.next()?.children[0]?.children[0];
-                    console.log(next_copy_element);
-                    next_copy_element.setAttribute("data-clipboard-text", newValue);
+                    // const next_copy_element = $(this)?.next()?.children[0]?.children[0];
+                    // console.log(next_copy_element);
+                    // next_copy_element.setAttribute("data-clipboard-text", newValue);
                     $(this).html(`<b>${newValueOutput}</b>`);
                 },
                 validate: function(value) {
