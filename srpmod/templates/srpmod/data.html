@@ -197,7 +197,8 @@ ESC to cancel{% endblocktranslate %}" id="blah"></i></th>
     {% get_datatables_language_static LANGUAGE_CODE as DT_LANG_PATH %}
 
     <script>
-        const clipboard = new ClipboardJS('.copy-text-fa-icon');
+        const copyButtons = document.querySelectorAll('.copy-text-fa-icon, .copy-tag');
+        const clipboard = new ClipboardJS(copyButtons);
 
         $(".copy-tag").on("click", function() {
         var buttons = document.querySelectorAll('.copy-tag'),
@@ -342,13 +343,18 @@ ESC to cancel{% endblocktranslate %}" id="blah"></i></th>
                 }
             });
 
+            const nonOrderableTargets = [1];
+            {% if perms.auth.srp_management %}
+                nonOrderableTargets.push(8);
+            {% endif %}
+
             elementTableSrpList.DataTable({
                 language: {url: '{{ DT_LANG_PATH }}'},
                 "order": [[ 6, "asc" ]],
                 "paging": false,
                 "columnDefs": [
                     {
-                        "targets": [1, 8],
+                        "targets": nonOrderableTargets,
                         "orderable": false
                     },
                     {
