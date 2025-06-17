@@ -251,45 +251,6 @@ ESC to cancel{% endblocktranslate %}" id="blah"></i></th>
             console.error('Action:', e.action);
             console.error('Trigger:', e.trigger);
         });
-        
-        $(".copy-tag").on("click", function() {
-            var buttons = document.querySelectorAll('.copy-tag'),
-                i = 0,
-                l = buttons.length;
-
-            for (i; i < l; i++) {
-                buttons[i].classList.add("hide")
-            }
-            var buttons2 = document.querySelectorAll('.lds-spinner'),
-                i = 0,
-                l = buttons2.length;
-
-            for (i; i < l; i++) {
-                buttons2[i].classList.remove("hide")
-            }
-
-            var url = "{% url 'srpmod:open_id' "CAHR_ID" %}";
-            var id = this.id
-            console.log(id);
-            url = url.replace('CAHR_ID', id);
-            $.get(url, function(data) {
-                console.log(data);
-                var buttons = document.querySelectorAll('.copy-tag'),
-                i = 0,
-                l = buttons.length;
-
-                for (i; i < l; i++) {
-                    buttons[i].classList.remove("hide")
-                }
-                var buttons2 = document.querySelectorAll('.lds-spinner'),
-                    i = 0,
-                    l = buttons2.length;
-
-                for (i; i < l; i++) {
-                    buttons2[i].classList.add("hide")
-                }            
-            });
-        });
 
         $(document).ready(() => {
             const elementEditableSrpAmount = $('.srp');
@@ -323,9 +284,9 @@ ESC to cancel{% endblocktranslate %}" id="blah"></i></th>
                 success: function(response, newValue) {
                     newValue = parseInt(newValue);
                     const newValueOutput = `${newValue.toLocaleString()} ISK`;
-                    // const next_copy_element = $(this)?.next()?.children[0]?.children[0];
-                    // console.log(next_copy_element);
-                    // next_copy_element.setAttribute("data-clipboard-text", newValue);
+                    const next_copy_element = $(this)?.next().next()[0].children[0].children[0];
+                    console.log(next_copy_element);
+                    next_copy_element.setAttribute("data-clipboard-text", newValue);
                     $(this).html(`<b>${newValueOutput}</b>`);
                 },
                 validate: function(value) {
