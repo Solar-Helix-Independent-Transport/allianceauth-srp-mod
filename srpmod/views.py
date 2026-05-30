@@ -67,10 +67,16 @@ def srp_open_info(request, id=None):
             linked = request.user.srp_character
             if linked:
                 logger.info(f"SRPMOD: {id} - checking {linked.token.character_name} online")
-                online = providers.provider.client.Location.get_characters_character_id_online(character_id=linked.token.character_id, token=linked.token.valid_access_token()).result()
-                if online.get('online', False):
+                online = providers.provider.client.Location.GetCharactersCharacterIdOnline(
+                    character_id=linked.token.character_id, 
+                    token=linked.token
+                ).result()
+                if online.online:
                     logger.info(f"SRPMOD: {id} - {linked.token.character_name} is online")
-                    resp = providers.provider.client.User_Interface.post_ui_openwindow_information(target_id=id, token=linked.token.valid_access_token()).result()
+                    resp = providers.provider.client.User_Interface.PostUiOpenwindowInformation(
+                        target_id=id, 
+                        token=linked.token
+                    ).result()
                     logger.info(f"SRPMOD: {id} - {linked.token.character_name} open window success")
                 else:
                     logger.info(f"SRPMOD: {id} - {linked.token.character_name} is offline")
