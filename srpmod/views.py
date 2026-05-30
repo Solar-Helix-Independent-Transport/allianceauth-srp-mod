@@ -70,13 +70,13 @@ def srp_open_info(request, id=None):
                 online = providers.provider.client.Location.GetCharactersCharacterIdOnline(
                     character_id=linked.token.character_id, 
                     token=linked.token
-                ).result()
+                ).result(use_etag=False)
                 if online.online:
                     logger.info(f"SRPMOD: {id} - {linked.token.character_name} is online")
                     resp = providers.provider.client.User_Interface.PostUiOpenwindowInformation(
                         target_id=id, 
                         token=linked.token
-                    ).result()
+                    ).result(use_etag=False)
                     logger.info(f"SRPMOD: {id} - {linked.token.character_name} open window success")
                 else:
                     logger.info(f"SRPMOD: {id} - {linked.token.character_name} is offline")
@@ -84,8 +84,8 @@ def srp_open_info(request, id=None):
             else:
                 return HttpResponse("Failed! No Linked Cahracter!")
         return HttpResponse("Success!")
-    except:
-        return HttpResponse("Failed!")
+    except Exception as e:
+        logger.error(f"SRP: Error occurred while opening info for ID {id}: {e}")
 
 
 @login_required
