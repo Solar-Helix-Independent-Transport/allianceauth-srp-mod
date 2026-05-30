@@ -85,7 +85,7 @@ def srp_open_info(request, id=None):
                 return HttpResponse("Failed! No Linked Cahracter!")
         return HttpResponse("Success!")
     except Exception as e:
-        logger.error(f"SRP: Error occurred while opening info for ID {id}: {e}")
+        return HttpResponse("Error occurred while opening info for ID {id}: {e}")
 
 
 @login_required
@@ -109,7 +109,7 @@ def srp_management(request, all=False):
     global_srp = {}
 
     try:
-        tempdate = fleet_breakout.filter().last().get('fleet_date')
+        tempdate = fleet_breakout.last().get('fleet_date')
         tempdate = tempdate.replace(day = 1).replace(hour = 0).replace(minute = 0)
         while tempdate < timezone.now():
             date_str = tempdate.strftime("%Y-%m")
