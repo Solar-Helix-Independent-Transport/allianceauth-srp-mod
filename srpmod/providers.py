@@ -16,8 +16,9 @@ def get_token(character_id, scopes):
 
 
 provider = ESIClientProvider(
-    compatibility_date="2026-05-30",
+    compatibility_date="2026-05-19",
     ua_appname="allianceauth-srp-mod",
     ua_version=__version__,
+    ua_url="https://github.com/Solar-Helix-Independent-Transport/allianceauth-srp-mod",
     operations=["GetCharactersCharacterIdOnline", "PostUiOpenwindowInformation"],
 )
